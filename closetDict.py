@@ -56,24 +56,30 @@ def createsValue(key):
 #INPUT COLOR find closest value in closetItems dictionary
 
 def addArray(array[]):
-
+    rgb = (array[0], array[1], array[2])
+    hex_result = "".join([format(val, '02X') for val in rgb])
+    recommendation = closetItems.get(input)
+    value = recommendation.split(', ')
+    color = value[0]
+    item = value[1]
+    print("Wear a " + webcolors.hex_to_name('#' + color) + " " + item)
 
 
 
 def main():
     print("Hello!")
 
-userInputColor = input("What color (hex) is your item?")
-# userInputColorHex = str('#{:02x}{:02x}{:02x}'.format(userInputColor))
-rgb = (255, 255, 255)
-hex_result = "".join([format(val, '02X') for val in rgb])
-userInputItem = str(input("What item is it?"))
-input = hex_result + ', ' + str(userInputItem)
-addDict(closetItems, input)
-print(closetItems)
-recommendation = closetItems.get(input)
-value = recommendation.split(', ')
-color = value[0]
-item = value[1]
-
-print("Wear a " + webcolors.hex_to_name('#' + color) + " " + item)
+# userInputColor = input("What color (hex) is your item?")
+# # userInputColorHex = str('#{:02x}{:02x}{:02x}'.format(userInputColor))
+# rgb = (255, 255, 255)
+# hex_result = "".join([format(val, '02X') for val in rgb])
+# userInputItem = str(input("What item is it?"))
+# input = hex_result + ', ' + str(userInputItem)
+# addDict(closetItems, input)
+# print(closetItems)
+# recommendation = closetItems.get(input)
+# value = recommendation.split(', ')
+# color = value[0]
+# item = value[1]
+#
+# print("Wear a " + webcolors.hex_to_name('#' + color) + " " + item)
