@@ -8,7 +8,7 @@ closetItems = {
 
 #dictionary for colors
 color = {
-
+    
 }
 
 items = {
@@ -20,6 +20,3 @@ def addDict(closetItems,key, value):
     closetItems[key] = value
 """"""
 def createsValue(key):
-
-
-
