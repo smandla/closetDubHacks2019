@@ -48,8 +48,11 @@ def createsValue(key):
 def main():
     print("Hello!")
 
-userInputColor = str(input("What color (hex) is your item?"))
+userInputColor = input("What color (hex) is your item?")
+# userInputColorHex = str('#{:02x}{:02x}{:02x}'.format(userInputColor))
+rgb = (0, 255, 0)
+hex_result = "".join([format(val, '02X') for val in rgb])
 userInputItem = int(input("What item is it?"))
-input = userInputColor + ', ' + str(userInputItem)
+input = hex_result + ', ' + str(userInputItem)
 addDict(closetItems, input)
 print(closetItems)
