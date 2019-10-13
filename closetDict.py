@@ -1,5 +1,6 @@
 import json
 import webcolors
+import math
 # createDict method
 
 # empty dictionary of closet items
@@ -10,12 +11,14 @@ closetItems = {
     "FFA500, pant": ["0000FF, shirt"],
     "FF0000, pant": ["FFFF00, shirt"],
     "006600, pant": ["000000, shirt"],
+    "004D66, pant": ["000000, shirt"],
     "FFFFFF, shirt": ["000000, pant"],
     "000000, shirt": ["FFFFFF, pant"],
     "663300, shirt": ["FFFFCC, pant"],
     "FFA500, shirt": ["0000FF, pant"],
     "FF0000, shirt": ["FFFF00, pant"],
-    "006600, shirt": ["000000, pant"]
+    "006600, shirt": ["000000, pant"],
+    "004D66, shirt": ["000000, pant"]
 }
 
 # dictionary for colors
@@ -55,20 +58,44 @@ def createsValue(key):
 
 #INPUT COLOR find closest value in closetItems dictionary
 
-def addArray(array[]):
+def addArray(array):
     rgb = (array[0], array[1], array[2])
-    hex_result = "".join([format(val, '02X') for val in rgb])
+    hex = "".join([format(val, '02X') for val in rgb])
+    input = hex_result + ', shirt'
+    hex_result = getClosestColor(input)
+
     recommendation = closetItems.get(input)
     value = recommendation.split(', ')
     color = value[0]
     item = value[1]
     print("Wear a " + webcolors.hex_to_name('#' + color) + " " + item)
 
+def getClosestColor(input):
+    value = input.split(', ')
+    color = tuple(int(value[0][i:i+2], 16) for i in (0, 2, 4))
+    # color = webcolors.hex_to_rgb(value[0])
+    item = value[1]
+    (r1,g1,b1) = color
+    (r2,g2,b2) = (255, 255, 255)
+    min = math.sqrt((r1 - r2)**2 + (g1 - g2) ** 2 + (b1 - b2) **2)
+    returnVal = input
+    keys = closetItems.keys()
+    for i in range(len(closetItems)):
+        value1 = list(keys)
+        value2 = value1[i].split(', ')
+        color1 = value2[0]
+        item1 = value2[1]
+        (r2,g2,b2) = tuple(int(color1[i:i+2], 16) for i in (0, 2, 4))
+        if (math.sqrt((r1 - r2)**2 + (g1 - g2) ** 2 + (b1 - b2) **2)) < min:
+            min = math.sqrt((r1 - r2)**2 + (g1 - g2) ** 2 + (b1 - b2) **2)
+            returnVal = closetItems[value1[i]]
 
+    return returnVal
 
 def main():
     print("Hello!")
 
+print (getClosestColor('ffffff, shirt'))
 # userInputColor = input("What color (hex) is your item?")
 # # userInputColorHex = str('#{:02x}{:02x}{:02x}'.format(userInputColor))
 # rgb = (255, 255, 255)
