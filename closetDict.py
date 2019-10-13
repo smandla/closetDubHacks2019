@@ -4,7 +4,18 @@ import json
 
 # empty dictionary of closet items
 closetItems = {
-
+    "FFFFFF, 2": ["000000, 1"],
+    "000000, 2": ["FFFFFF, 1"],
+    "663300, 2": ["FFFFCC, 1"],
+    "FFA500, 2": ["0000FF, 1"],
+    "FF0000, 2": ["FFFF00, 1"],
+    "006600, 2": ["000000, 1"],
+    "FFFFFF, 1": ["000000, 2"],
+    "000000, 1": ["FFFFFF, 2"],
+    "663300, 1": ["FFFFCC, 2"],
+    "FFA500, 1": ["0000FF, 2"],
+    "FF0000, 1": ["FFFF00, 2"],
+    "006600, 1": ["000000, 2"]
 }
 
 # dictionary for colors
@@ -44,15 +55,20 @@ def createsValue(key):
 
 #INPUT COLOR find closest value in closetItems dictionary
 
+# def addArray(array[]):
+
+
+
 
 def main():
     print("Hello!")
 
 userInputColor = input("What color (hex) is your item?")
 # userInputColorHex = str('#{:02x}{:02x}{:02x}'.format(userInputColor))
-rgb = (0, 255, 0)
+rgb = (255, 255, 255)
 hex_result = "".join([format(val, '02X') for val in rgb])
 userInputItem = int(input("What item is it?"))
 input = hex_result + ', ' + str(userInputItem)
 addDict(closetItems, input)
 print(closetItems)
+recommendation = closetItems.get(input)
