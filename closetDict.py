@@ -42,19 +42,15 @@ def createsValue(key):
     newValue = newColor[0] + ', ' + str(newItem)
     return newValue
 
+#INPUT COLOR find closest value in closetItems dictionary
+
 
 def main():
     print("Hello!")
 
-
 userInputColor = str(input("What color (hex) is your item?"))
 userInputItem = int(input("What item is it?"))
 input = userInputColor + ', ' + str(userInputItem)
-
-userInputColor1 = str(input("What color (hex) is your item?"))
-userInputItem1 = int(input("What item is it?"))
-input1 = userInputColor1 + ', ' + str(userInputItem1)
-addDict(closetItems, input1)
-result = addDict(closetItems)
+addDict(closetItems, input)
 print(closetItems)
 
