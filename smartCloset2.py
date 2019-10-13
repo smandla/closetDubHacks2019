@@ -1,6 +1,8 @@
 import os
 import webcolors
 import text2speech
+import closetDict
+import camTest
 from playsound import playsound
 def closest_colour(requested_colour):
     min_colours = {}
@@ -17,10 +19,11 @@ from google.cloud import vision
 client = vision.ImageAnnotatorClient()
 import io
 from PIL import Image
-
+camTest.capture()
 # Opens a image in RGB mode
-im = Image.open('kavya.jpg')
-path = 'kavya.jpg'
+im = Image.open('opencv.png')
+path = 'opencv.png'
+suggest = input("what article of clothing do you want a suggestion for? ")
 with io.open(path, 'rb') as image_file:
         content = image_file.read()
 image = vision.types.Image(content=content)
@@ -54,9 +57,9 @@ for object_ in objects:
         props = response.image_properties_annotation
         topColor = []
         for color in props.dominant_colors.colors:
-            topColor.append(format(color.color.red))
-            topColor.append(format(color.color.green))
-            topColor.append(format(color.color.blue))
+            topColor.append(int(float(format(color.color.red))))
+            topColor.append(int(float(format(color.color.green))))
+            topColor.append(int(float(format(color.color.blue))))
             break
 
     if (object_.name == "Pants"):
@@ -76,16 +79,15 @@ for object_ in objects:
         props = response.image_properties_annotation
         pantColor = []
         for color in props.dominant_colors.colors:
-            pantColor.append(format(color.color.red))
-            pantColor.append(format(color.color.green))
-            pantColor.append(format(color.color.blue))
+            pantColor.append(int(float(format(color.color.red))))
+            pantColor.append(int(float(format(color.color.green))))
+            pantColor.append(int(float(format(color.color.blue))))
             break
-for color in topColor:
-    print(color)
-for color in pantColor:
-    print(color)
-subscription_key = "3dcb81c95f9d46248813f574677f3272"
-app = text2speech.TextToSpeech(subscription_key, "purple", "shirt")
-app.get_token()
-app.save_audio()
-playsound('sample.wav')
+if suggest == "pant":
+    for color in topColor:
+        print(int(float(color)))
+    closetDict.addArray(topColor, "shirt")
+else:
+    for color in pantColor:
+        print(int(float(color)))
+    closetDict.addArray(pantColor, "pant")
